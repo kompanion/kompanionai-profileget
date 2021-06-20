@@ -5,6 +5,7 @@ This repo contains the AWS Lambda function handler to fetch user profiles via th
 Endpoint address:
 
 ```
+https://w5ygptgx9k.execute-api.us-east-2.amazonaws.com/profileget
 ```
 
 JSON payload:
@@ -24,5 +25,5 @@ export TOKEN=$(aws cognito-idp initiate-auth \
     --auth-parameters USERNAME=gp@cogniant.ai,PASSWORD=asdfasdf \
     --query 'AuthenticationResult.AccessToken' \
     --output text)
-curl -i --header "Content-Type: application/json" --request POST --data '{"jwttoken": "'"$TOKEN"'" }' https://
+curl -i --header "Content-Type: application/json" --request POST --data '{"jwttoken": "'"$TOKEN"'" }' https://w5ygptgx9k.execute-api.us-east-2.amazonaws.com/profileget
 ```
