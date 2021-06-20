@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'chadbotprofileget
+
+  SAM Template for chadbotprofileget
+
+  '
+Globals:
+  Function:
+    Timeout: 29
+Resources:
+  ChadBotProfileGetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ChadBotProfileGetFunction
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        ChadBotProfileGet:
+          Type: HttpApi
+          Properties:
+            Path: /chadbotprofileget
+            Method: post
+            TimeoutInMillis: 5000
+Outputs:
+  InferenceApi:
+    Description: API Gateway endpoint URL for cogniant.ai ChadBot ProfileGet function
+    Value:
+      Fn::Sub: https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/chadbotprofileget

@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  profileget
+
+  SAM Template for profileget
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 29
+
+Resources:
+  ProfileGetFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: profileget/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        ProfileGet:
+          Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /profileget
+            Method: post
+            TimeoutInMillis: 5000
+
+Outputs:
+  InferenceApi:
+    Description: "API Gateway endpoint URL for kompanion.ai ProfileGet function"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/profileget"
